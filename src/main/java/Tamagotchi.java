@@ -1,63 +1,150 @@
 public class Tamagotchi {
+    //max
+    private int energiaMax ;
+    private int saciedadeMax;
+    private int limpezaMax;
+    private int idadeMax;
+
+    //atual
+    private int energiaAtual ;
+    private int saciedadeAtual;
+    private int limpezaAtual;
+    private int idadeAtual = 0;
+
+    private int diamantes = 0;
     
 
     public Tamagotchi(int energiaMax, int saciedadeMax, int limpezaMax, int idadeMax){
+        // Maximo
+        this.energiaMax = energiaMax;
+        this.saciedadeMax =saciedadeMax;
+        this.limpezaMax =limpezaMax;
+        this.idadeMax =idadeMax;
+      
+        // Atual
+        this.energiaAtual = energiaMax;
+        this.saciedadeAtual = saciedadeMax; 
+        this.limpezaAtual = limpezaMax;
+       
+   
     }
 
     public int getEnergiaMax() {
-        return -1;
+        return energiaMax;
     }
 
     public int getSaciedadeMax() {
-        return -1;
+        return saciedadeMax;
     }
 
     public int getLimpezaMax() {
-        return -1;
+        return limpezaMax;
     }
 
     public int getIdadeMax() {
-        return -1;
+        return idadeMax;
     }
 
+    
     public int getEnergiaAtual() {
-        return -1;
+        return energiaAtual;
     }
 
     public int getSaciedadeAtual() {
-        return -1;
+        return saciedadeAtual;
     }
 
     public int getLimpezaAtual() {
-        return -1;
+        return limpezaAtual;
     }
 
     public int getIdadeAtual() {
-        return -1;
+        return idadeAtual;
     }
-
+    
     public int getDiamantes() {
-        return -1;
+        return diamantes;
     }
 
     public boolean getEstaVivo(){
-        return true;
+       if (energiaAtual<=0) {
+           energiaAtual = 0;
+           return false;
+       }else if (saciedadeAtual<=0){
+           saciedadeAtual = 0;
+           return false;
+       }else if(idadeMax<=idadeAtual) {
+           return false;
+       }else if (limpezaAtual<=0) {
+           limpezaAtual = 0;
+           return false;
+       }
+       return true;
+        
     }
 
+    //  MECHER AQUI
     public boolean brincar(){
-        return true;
+        if (getEstaVivo()){
+            
+                
+            energiaAtual -= 2;  
+            saciedadeAtual -= 1;
+            limpezaAtual -= 3;
+            idadeAtual += 1;
+            diamantes  += 1;
+            return true;
+            
+        }
+
+           return false;
+
     }
 
     public boolean comer(){
+        if (getEstaVivo()){
+            
+        energiaAtual -= 1;
+        saciedadeAtual += 4;
+        limpezaAtual -= 2;
+        idadeAtual += 1;
         return true;
+            
+        }
+
+       return false;
+       
     }
 
     public boolean dormir(){
-        return true;
+        if (getEstaVivo()&& energiaMax-energiaAtual >= 5){
+            
+                
+                energiaAtual = energiaMax;
+                idadeAtual +=1;
+                saciedadeAtual -= 2;
+                return true;
+    
+            
+
+        }
+      return false;
     }
 
     public boolean banhar(){
-        return true;
+        if (getEstaVivo()){
+            energiaAtual -= 3; 
+            saciedadeAtual -= 1;
+            limpezaAtual = limpezaMax;
+            idadeAtual += 1;
+            diamantes += 0;
+            return true;
+        }
+
+       return false;
+        
+       
+
     }
 
 }
